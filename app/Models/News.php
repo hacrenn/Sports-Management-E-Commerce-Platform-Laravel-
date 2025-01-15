@@ -11,8 +11,8 @@ class News extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 
-        'content', 
+        'title',
+        'content',
         'image',
         'slug',
     ];
@@ -32,6 +32,7 @@ class News extends Model
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'id';
     }
+
 }

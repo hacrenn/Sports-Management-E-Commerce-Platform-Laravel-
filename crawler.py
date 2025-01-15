@@ -20,9 +20,8 @@ def extrair_dados_liga_pro(url):
             soup = BeautifulSoup(response.text, 'html.parser')
             
             tabelas = soup.find_all('table', {'class': 'zztable'})
-            print(f"Número de tabelas encontradas: {len(tabelas)}")  
             
-            equipes = []
+            equipas = []
             if len(tabelas) > 1:
                 tabela = tabelas[1]  #segunda tabela
                 print("\nClassificação:")
@@ -33,12 +32,12 @@ def extrair_dados_liga_pro(url):
                 for tr in tabela.find_all('tr')[1:]:  
                     colunas = tr.find_all('td')
                     if colunas:
-                        nome_equipe = colunas[2].text.strip() 
+                        nome_equipa = colunas[2].text.strip() 
                         pontos = int(colunas[3].text.strip())
-                        print(f"{nome_equipe} | {pontos}")
-                        equipes.append({'nome': nome_equipe, 'pontos': pontos})
+                        print(f"{nome_equipa} | {pontos}")
+                        equipas.append({'nome': nome_equipa, 'pontos': pontos})
                 
-                return json.dumps(equipes)  # Retorna como JSON
+                return json.dumps(equipas)  # Retorna como JSON
             else:
                 print("Tabela de classificação não encontrada!")
                 return json.dumps([])  # Retorna JSON vazio

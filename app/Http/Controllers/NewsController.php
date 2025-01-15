@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\News;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -14,7 +15,7 @@ class NewsController extends Controller
         $noticias = News::orderBy('created_at', 'desc')->get();
         return view('gerir-noticias', ['noticias' => $noticias]);
     }
-    
+
     $noticias = News::orderBy('created_at', 'desc')->get();
     return view('noticias', ['noticias' => $noticias]);
 }
@@ -59,7 +60,7 @@ class NewsController extends Controller
                 if ($noticia->image) {
                     Storage::disk('public')->delete($noticia->image);
                 }
-                
+
                 // Salva a nova imagem
                 $path = $request->file('image')->store('news', 'public');
                 $noticia->image = $path;
@@ -67,6 +68,7 @@ class NewsController extends Controller
 
             $noticia->title = $request->title;
             $noticia->content = $request->content;
+            $noticia->slug=Str::slug($request->title);;
             $noticia->save();
 
             return redirect()->back()->with('success', 'Notícia atualizada com sucesso!');
@@ -81,7 +83,7 @@ class NewsController extends Controller
             if ($noticia->image) {
                 Storage::disk('public')->delete($noticia->image);
             }
-            
+
             $noticia->delete();
             return redirect()->back()->with('success', 'Notícia excluída com sucesso!');
         } catch (\Exception $e) {
@@ -90,7 +92,7 @@ class NewsController extends Controller
     }
 
     public function show($slug)
-    {   
+    {
         $noticia= News::where('slug', $slug)->firstOrFail();
         return view('noticia-detalhe', compact('noticia'));
     }

@@ -12,14 +12,15 @@
     @include('layouts.header')
 
     <div class="container my-5">
+
         <div class="row">
             <div class="col-12 mb-4">
                 <h1 class="text-center">{{ $noticia->title }}</h1>
                 <p class="text-muted text-center">{{ $noticia->created_at->format('d/m/Y') }}</p>
             </div>
             <div class="col-md-6">
-                <img src="{{ Storage::url($noticia->image) }}" 
-                     alt="{{ $noticia->title }}" 
+                <img src="{{ Storage::url($noticia->image) }}"
+                     alt="{{ $noticia->title }}"
                      class="img-fluid rounded shadow">
             </div>
             <div class="col-md-6">

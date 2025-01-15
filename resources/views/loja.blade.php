@@ -19,11 +19,11 @@
             @foreach($products as $product)
                 <div class="col">
                     <div class="card mb-4">
-                    <img src="{{ $product->metadata->image_url ?? 'https://via.placeholder.com/150' }}" class="card-img-top" alt="{{ $product->name }}">
+                    <img src="{{ Storage::url($product->imagem) }}" class="card-img-top" alt="{{ $product->name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
-                            <p class="card-text">{{ $product->description }}</p>
-                            <p class="card-text">Preço: €{{ number_format($product->price, 2) }}</p>
+                            <h5 class="card-title">{{ $product->nome }}</h5>
+                            <p class="card-text">{{ $product->descricao }}</p>
+                            <p class="card-text">Preço: €{{ number_format($product->preco, 2) }}</p>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $product->id }}">Comprar</button>
                         </div>
                     </div>
@@ -34,18 +34,18 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalLabel-{{ $product->id }}">{{ $product->name }}</h5>
+                                <h5 class="modal-title" id="modalLabel-{{ $product->id }}">{{ $product->nome }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="{{ $product->metadata->image_url ?? 'https://via.placeholder.com/150' }}" class="card-img-top" alt="{{ $product->name }}">
-                                <p>{{ $product->description }}</p>
+                                <img src="{{ Storage::url($product->imagem) }}" class="card-img-top" alt="{{ $product->name }}">
+                                <p>{{ $product->descricao }}</p>
                                 <div class="mb-3">
                                     <label for="quantidade-{{ $product->id }}" class="form-label">Quantidade</label>
-                                    <input type="number" 
-                                           class="form-control" 
-                                           id="quantidade-{{ $product->id }}" 
-                                           value="1" 
+                                    <input type="number"
+                                           class="form-control"
+                                           id="quantidade-{{ $product->id }}"
+                                           value="1"
                                            min="1"
                                            step="1"
                                            pattern="\d*"

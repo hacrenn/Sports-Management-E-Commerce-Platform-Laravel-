@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ProfileController; 
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\PlantelController; 
+use App\Http\Controllers\PlantelController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -29,10 +29,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Páginas públicas (não requerem autenticação)
 Route::get('/plantel', [PlantelController::class, 'show'])->name('plantel.show');
-Route::view('/noticias', 'noticias');
+//Route::view('/noticias', 'noticias');
 Route::get('/loja', [ProductController::class, 'loja'])->name('loja');
 Route::get('/galeria', [GaleriaController::class, 'show'])->name('galeria.show');
 Route::get('/calendario', [GameController::class, 'calendario'])->name('calendario');
+
+// Rota para as notícias
+Route::get('/noticias', [NewsController::class, 'index'])->name('news.index');
+Route::get('/noticias/{id}', [NewsController::class, 'show'])->name('noticias.show');
 
 
 // Páginas de autenticação
@@ -63,9 +67,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
 });
 
-// Rota para as notícias
-Route::get('/noticias', [NewsController::class, 'index'])->name('news.index');
-Route::get('/noticias/{slug}', [NewsController::class, 'show'])->name('noticias.show');
 
 // Rotas protegidas para administradores
 Route::middleware(['auth', 'isAdmin'])->group(function () {
@@ -126,13 +127,13 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/add-product', [ProductController::class, 'showAddProductForm'])->name('products.add');
     Route::post('/products', [ProductController::class, 'createProduct'])->name('products.create');
-    Route::delete('/products/{id}', [ProductController::class, 'deleteProduct'])->name('products.delete');
+    Route::delete('/products/{produto}', [ProductController::class, 'deleteProduct'])->name('products.delete');
 });
 
 // Rotas para verificação de email
 Route::get('/verify-email/{token}', function($token) {
     $user = User::where('email_verification_token', $token)->first();
-    
+
     if (!$user) {
         return redirect('/login')->with('error', 'Link de verificação inválido.');
     }
@@ -156,7 +157,7 @@ Route::get('/password/reset', function () {
 Route::post('/password/email', function (Request $request) {
     $request->validate(['email' => 'required|email']);
     $user = User::where('email', $request->email)->first();
-    
+
     if ($user) {
         $token = Str::random(60);
         DB::table('password_reset_tokens')->updateOrInsert(
@@ -166,7 +167,7 @@ Route::post('/password/email', function (Request $request) {
                 'created_at' => now()
             ]
         );
-        
+
         Mail::send('emails.reset-password', [
             'token' => $token,
             'email' => $request->email
@@ -175,7 +176,7 @@ Route::post('/password/email', function (Request $request) {
             $message->subject('Redefinição de Senha');
         });
     }
-    
+
     return back()->with('status', 'Se encontrarmos um usuário com esse email, enviaremos um link de recuperação de senha.');
 })->name('password.email');
 
@@ -204,7 +205,7 @@ Route::post('/password/update', function (Request $request) {
     }
 
     $user = User::where('email', $request->email)->first();
-    
+
     if (!$user) {
         return back()->withErrors(['email' => 'Não encontramos um usuário com esse endereço de e-mail.']);
     }

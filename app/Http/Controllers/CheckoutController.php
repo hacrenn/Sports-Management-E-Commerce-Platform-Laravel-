@@ -18,7 +18,7 @@ class CheckoutController extends Controller
         $intent = PaymentIntent::create([
             'amount' => 50, // Example amount in cents
             'currency' => 'eur',
-        ]); 
+        ]);
 
         return view('checkout', ['intent' => $intent]);
     }
@@ -50,14 +50,8 @@ class CheckoutController extends Controller
             ]);
         } else if ($paymentIntent->status == 'succeeded') {
             $cartData = json_decode($request->cart, true);
-            
-            $order = Order::create([
-                'user_id' => auth()->id(),
-                'products' => $request->cart,
-                'amount' => $amount,
-                'payment_method' => $request->payment_method,
-                'status' => 'completed'
-            ]);
+
+
 
             $products = collect($cartData)->map(function ($item) {
                 return (object) [

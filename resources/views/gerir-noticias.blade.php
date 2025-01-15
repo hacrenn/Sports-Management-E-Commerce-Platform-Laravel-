@@ -78,24 +78,24 @@
                             @foreach($noticias as $noticia)
                                 <tr>
                                     <td>
-                                        <img src="{{ Storage::url($noticia->image) }}" 
-                                             alt="Imagem da Notícia" 
+                                        <img src="{{ Storage::url($noticia->image) }}"
+                                             alt="Imagem da Notícia"
                                              style="width: 100px; height: 60px; object-fit: cover;">
                                     </td>
                                     <td>{{ $noticia->title }}</td>
                                     <td>{{ $noticia->created_at->format('d/m/Y') }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-primary" 
-                                                data-bs-toggle="modal" 
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                data-bs-toggle="modal"
                                                 data-bs-target="#editNews{{ $noticia->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="{{ route('noticias.destroy', $noticia->id) }}" 
-                                              method="POST" 
+                                        <form action="{{ route('noticias.destroy', $noticia->id) }}"
+                                              method="POST"
                                               class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                            <button type="submit" class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Tem certeza que deseja excluir esta notícia?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -111,35 +111,35 @@
                                                 <h5 class="modal-title">Editar Notícia</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
-                                            <form action="{{ route('noticias.update', $noticia->id) }}" 
-                                                  method="POST" 
+                                            <form action="{{ route('noticias.update', $noticia->id) }}"
+                                                  method="POST"
                                                   enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="editTitle{{ $noticia->id }}" class="form-label">Título</label>
-                                                        <input type="text" 
-                                                               class="form-control" 
-                                                               id="editTitle{{ $noticia->id }}" 
-                                                               name="title" 
-                                                               value="{{ $noticia->title }}" 
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="editTitle{{ $noticia->id }}"
+                                                               name="title"
+                                                               value="{{ $noticia->title }}"
                                                                required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="editContent{{ $noticia->id }}" class="form-label">Conteúdo</label>
-                                                        <textarea class="form-control" 
-                                                                  id="editContent{{ $noticia->id }}" 
-                                                                  name="content" 
-                                                                  rows="4" 
+                                                        <textarea class="form-control"
+                                                                  id="editContent{{ $noticia->id }}"
+                                                                  name="content"
+                                                                  rows="4"
                                                                   required>{{ $noticia->content }}</textarea>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="editImage{{ $noticia->id }}" class="form-label">Nova Imagem (opcional)</label>
-                                                        <input type="file" 
-                                                               class="form-control" 
-                                                               id="editImage{{ $noticia->id }}" 
-                                                               name="image" 
+                                                        <input type="file"
+                                                               class="form-control"
+                                                               id="editImage{{ $noticia->id }}"
+                                                               name="image"
                                                                accept="image/*">
                                                     </div>
                                                 </div>
@@ -162,4 +162,4 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

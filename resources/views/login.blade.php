@@ -25,7 +25,7 @@
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Seu email" value="{{ old('email') }}" required>
-        
+
         <!-- Exibir erro caso haja algum -->
         @error('email')
             <div class="text-danger">{{ $message }}</div>
@@ -36,7 +36,7 @@
     <div class="mb-3">
         <label for="password" class="form-label">Senha</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Sua senha" required>
-        
+
         <!-- Exibir erro caso haja algum -->
         @error('password')
             <div class="text-danger">{{ $message }}</div>
@@ -52,8 +52,8 @@
     <!-- Botão de Entrar -->
     <button type="submit" class="btn btn-primary w-100">Entrar</button>
 
-    <!-- Link para registro -->
-    <p class="text-center text-muted mt-3">Não tem conta? <a href="/register">Registre-se aqui</a></p>
+    <!-- Link para registo -->
+    <p class="text-center text-muted mt-3">Não tem conta? <a href="/register">Registe-se aqui</a></p>
     <p class="text-center text-muted mt-3">Esqueceu sua senha? <a href="/password/reset">Recuperar senha</a></p>
 </form>
         </div>

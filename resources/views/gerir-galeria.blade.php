@@ -59,23 +59,23 @@
                             @foreach($fotos as $foto)
                                 <tr>
                                     <td>
-                                        <img src="{{ Storage::url($foto->imagem) }}" 
-                                             alt="Imagem da Galeria" 
+                                        <img src="{{ Storage::url($foto->imagem) }}"
+                                             alt="Imagem da Galeria"
                                              style="width: 100px; height: 60px; object-fit: cover;">
                                     </td>
                                     <td>{{ $foto->legenda }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-primary" 
-                                                data-bs-toggle="modal" 
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                data-bs-toggle="modal"
                                                 data-bs-target="#editFoto{{ $foto->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="{{ route('galeria.destroy', $foto) }}" 
-                                              method="POST" 
+                                        <form action="{{ route('galeria.destroy', $foto->id) }}"
+                                              method="POST"
                                               class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                            <button type="submit" class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Tem certeza que deseja excluir esta foto?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -91,18 +91,18 @@
                                                 <h5 class="modal-title">Editar Foto</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
-                                            <form action="{{ route('galeria.update', $foto->id) }}" 
+                                            <form action="{{ route('galeria.update', $foto->id) }}"
                                                   method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="editLegenda{{ $foto->id }}" class="form-label">Legenda</label>
-                                                        <input type="text" 
-                                                               class="form-control" 
-                                                               id="editLegenda{{ $foto->id }}" 
-                                                               name="legenda" 
-                                                               value="{{ $foto->legenda }}" 
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="editLegenda{{ $foto->id }}"
+                                                               name="legenda"
+                                                               value="{{ $foto->legenda }}"
                                                                required>
                                                     </div>
                                                 </div>
@@ -124,4 +124,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>
