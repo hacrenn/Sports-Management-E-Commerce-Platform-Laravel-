@@ -44,7 +44,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Páginas de registro
+// Páginas de registo
 Route::get('/register', function() {
     return view('register');
 });
@@ -118,7 +118,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 //Rotas para checkout
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.form');
-    Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
     Route::post('/checkout-process', [CheckoutController::class, 'handleCheckout'])->name('checkout.process');
     Route::get('/checkout/success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
 });
@@ -217,7 +216,6 @@ Route::post('/password/update', function (Request $request) {
 
     return redirect('/login')->with('status', 'Sua senha foi redefinida com sucesso!');
 })->name('password.update');
-
 
 Route::get('/minhas-compras', [OrderController::class, 'userOrders'])->name('user.orders')->middleware('auth');
 

@@ -13,12 +13,11 @@ class Order extends Model
         'user_id',
         'products',
         'amount',
-        'payment_method',
-        'status'
+        'payment_method'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-} 
+}

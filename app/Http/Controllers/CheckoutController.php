@@ -8,6 +8,8 @@ use App\Mail\InvoiceMail;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OrderController;
 
 class CheckoutController extends Controller
 {
@@ -26,6 +28,7 @@ class CheckoutController extends Controller
     public function handleCheckout(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
 
         $amount = $request->amount;
 
@@ -80,6 +83,16 @@ class CheckoutController extends Controller
                 \Log::error('Erro ao gerar PDF ou enviar email: ' . $e->getMessage());
                 return response()->json(['error' => $e->getMessage()], 500);
             }
+
+            $request->merge([
+            'user_id' => auth()->id(),
+            'products' => $cartData,
+            'amount' => $amount / 100,
+            'payment_method' => 'card',
+            ]);
+
+            $orderController = new OrderController();
+            $orderController->store($request);
 
             return redirect()->route('checkout.success');
         } else {

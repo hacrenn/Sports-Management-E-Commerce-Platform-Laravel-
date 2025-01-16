@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <ul id="cart-items" class="list-group">
-                    <!-- Items will be dynamically added here -->
+
                 </ul>
             </div>
             <div class="modal-footer">

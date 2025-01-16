@@ -1,14 +1,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function adicionarAoCarrinho(id, name, price) {
+function adicionarAoCarrinho(id, nome, preco) {
     const quantidade = parseInt(document.getElementById('quantidade-' + id).value);
     const produto = {
         id: id,
-        name: name,
+        name: nome,
         quantidade: quantidade,
-        price: price
+        price: preco
     };
 
     // Check if the product already exists in the cart
@@ -21,7 +21,7 @@ function adicionarAoCarrinho(id, name, price) {
         cart.push(produto);
     }
 
-    sessionStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartModal();
 
@@ -33,7 +33,7 @@ function adicionarAoCarrinho(id, name, price) {
 
 function removeFromCart(index) {
     cart.splice(index, 1);
-    sessionStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartModal();
     updateCheckoutPage();

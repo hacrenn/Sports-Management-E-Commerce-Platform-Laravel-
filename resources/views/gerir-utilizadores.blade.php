@@ -45,15 +45,15 @@
                                         @if($user->role === 0)
                                             Utilizador
                                         @elseif($user->role === 1)
-                                            Editor
+                                            Sócio
                                         @elseif($user->role === 2)
                                             Administrador
                                         @endif
                                     </td>
                                     <td>
                                         @if(Auth::user()->role === 2 && Auth::id() !== $user->id)
-                                            <button class="btn btn-sm btn-primary" 
-                                                    data-bs-toggle="modal" 
+                                            <button class="btn btn-sm btn-primary"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#editRole{{ $user->id }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>

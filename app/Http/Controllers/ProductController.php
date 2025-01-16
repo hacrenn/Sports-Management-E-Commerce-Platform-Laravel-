@@ -8,13 +8,20 @@ use Stripe\Price as StripePrice;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use App\Models\Artigo;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function loja()
     {
         $products = Artigo::all();
-        return view('loja', compact('products'));
+
+        $desconto = 0;
+        if (auth()->check() && auth()->user()->role === 1) {
+        $desconto = 0.10;
+        }
+
+        return view('loja', compact('products','desconto'));
     }
 
     public function createProduct(Request $request)
@@ -25,10 +32,6 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0.01',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
-
-
-
-
 
 
 

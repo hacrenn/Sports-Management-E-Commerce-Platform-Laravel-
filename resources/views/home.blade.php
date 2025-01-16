@@ -142,5 +142,11 @@
     </div>
 
     @include('layouts.storescript')
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        localStorage.removeItem('cart');
+    });
+    </script>
 </body>
 </html>
