@@ -1,61 +1,84 @@
-# AC Vila Meã - Plataforma de Gestão Desportiva
+# Vila Meã ClubHub
 
-<p align="center">
-  <img src="[inserir_url_do_logo]" alt="AC Vila Meã Logo" width="200"/>
-</p>
+Vila Meã ClubHub is a full-featured web platform developed for **AC Vila Meã**, bringing together club news, squad management, match information, an online store, ticket sales, user authentication, and an administrative back office.
 
-## Sobre o Projeto
+Built with Laravel, this project demonstrates real-world features such as payments, email notifications, PDF generation, file uploads, role-based access, and external data integration.
 
-AC Vila Meã é uma plataforma web completa que combina um site institucional com uma loja online, desenvolvida especificamente para o clube de futebol AC Vila Meã. O sistema oferece funcionalidades abrangentes para gestão do clube, interação com torcedores e comercialização de produtos oficiais.
+## Features
 
-### Funcionalidades Principais
+- Club website with modern, responsive design
+- News management with image uploads
+- Squad and staff pages
+- Match calendar and match details
+- Online store with product management
+- Shopping cart and checkout flow
+- Stripe payment integration
+- Ticket purchasing system
+- User registration and login
+- Password reset functionality
+- Admin dashboard
+- Email notifications
+- PDF invoice generation
+- Image gallery
+- External standings update script using Python
 
-- **Gestão de Conteúdo**
-  - Sistema de notícias e atualizações
-  - Galeria multimídia (fotos e vídeos)
-  - Gestão de plantel e jogos
+## Tech Stack
 
-- **E-commerce**
-  - Loja oficial do clube
-  - Sistema de gestão de produtos
-  - Processamento seguro de pagamentos
-  - Geração automática de faturas
+- **Backend:** Laravel 11, PHP 8.2
+- **Frontend:** Blade, Bootstrap, Tailwind CSS, Vite
+- **Database:** PostgreSQL
+- **Payments:** Stripe / Laravel Cashier
+- **PDF Generation:** Dompdf
+- **Language Integration:** Python for standings crawler
+- **Authentication:** Laravel Breeze / custom auth flow
 
-- **Área Administrativa**
-  - Gestão de utilizadores
-  - Controle de stock
-  - Relatórios e análises
+## Project Structure
 
-## Tecnologias Utilizadas
+- `app/Http/Controllers` – application logic
+- `app/Models` – Eloquent models
+- `database/migrations` – database schema
+- `resources/views` – Blade templates
+- `public/storage` – uploaded images and public assets
+- `python/` or related script folder – standings crawler logic
 
-- Laravel (PHP)
-- Python
-- Node.js
-- PostgreSQL
-- Stripe (Pagamentos)
-- Mailtrap (E-mails)
+## Main Modules
 
-## Requisitos
+### Public Website
+Visitors can browse club news, squad information, fixtures, gallery images, and general club content.
 
-- PHP >= 8.1
+### Authentication
+Users can create an account, log in, reset their password, and access their personal area.
+
+### Admin Panel
+Administrators can manage:
+- news
+- matches
+- players
+- products
+- orders
+- tickets
+- gallery images
+
+### E-commerce
+The project includes product listing, cart handling, checkout, and Stripe payment processing.
+
+### Tickets
+Users can buy tickets and receive a generated PDF receipt/invoice.
+
+### Standings Automation
+A Python script updates league standings automatically from an external source.
+
+## Requirements
+
+- PHP 8.2+
 - Composer
-- Node.js >= 16
+- Node.js + npm
 - PostgreSQL
-- Python 3
+- Stripe account and API keys
+- Python 3.x
 
-## Instalação
+## Installation
 
-1. Clone o repositório
-2. Instale as dependências
-3. Configure o arquivo .env
-4. Configure as variáveis de ambiente no arquivo .env
-5. Execute as migrações
-6. Compile os assets
-7. Inicie o servidor
-
-## Melhorias Futuras
-
-- Implementação de filtros na loja
-- Otimização da responsividade mobile
-- Aprimoramento do front-end
-- Adição de novos métodos de pagamento
+```bash
+git clone https://github.com/your-username/vila-mea-clubhub.git
+cd vila-mea-clubhub
