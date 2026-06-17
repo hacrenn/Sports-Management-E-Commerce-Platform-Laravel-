@@ -1,6 +1,6 @@
-# Vila Meã ClubHub
+# Sports Management & E-Commerce Plataform (Laravel)
 
-Vila Meã ClubHub is a full-featured web platform developed for **AC Vila Meã**, bringing together club news, squad management, match information, an online store, ticket sales, user authentication, and an administrative back office.
+This project is a full-featured web platform developed for **AC Vila Meã**, bringing together club news, squad management, match information, an online store, ticket sales, user authentication, and an administrative back office.
 
 Built with Laravel, this project demonstrates real-world features such as payments, email notifications, PDF generation, file uploads, role-based access, and external data integration.
 
@@ -77,8 +77,3 @@ A Python script updates league standings automatically from an external source.
 - Stripe account and API keys
 - Python 3.x
 
-## Installation
-
-```bash
-git clone https://github.com/your-username/vila-mea-clubhub.git
-cd vila-mea-clubhub
